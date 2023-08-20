@@ -1,0 +1,50 @@
+#yo{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:black;
+    border:none;
+}
+.video-js{
+    color:yellow;
+    font-size:15px;
+    background-color:black;
+    border:none;
+}
+video{
+    height:flex;
+}
+.vjs-title-bar{
+    height:100%;
+    overlay:hidden;
+    opacity:.7;
+}
+
+@keyframes anim-fade-out{
+    110%{opacity:1.1;}
+    40%{opacity:.4;}
+}
+
+.fade-out{
+    animation: anim-fade-out 5s;
+}
+
+@keyframes anim-fade-in{
+    50%{opacity:.5;}
+    100%{opacity:1;}
+}
+
+.fade-in{
+    animation: anim-fade-in 5s;
+}
+
+.video-js .vjs-big-play-button  {
+    height:1.6em;
+    width:1.6em;
+    border: 2px solid red;
+    border-radius:50%;
+    margin-top:-1.1em;
+
+}
