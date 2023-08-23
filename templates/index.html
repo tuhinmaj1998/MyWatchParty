@@ -1,13 +1,65 @@
 <html lang="en">
 <head>
     <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index_css.css')}}">
 </head>
 <body>
- <div>
-     Welcome to MyWatchTogether!
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h1 style="color:Yellow;">Join <br>The Party</h1>
+            <input id="join-value" type="text" value="" placeholder="Paste session id or link here...">
+            <a id="join-button" class="fa" onclick="join_party()">🎉</a>
 
-     join or create a watch party!
+            <div id="join-result" class="result">
+                <img id="join-img-res" class="img-res"
+                     src=""/>
 
- </div>
+                <div class="text-over">
+                    <input type='text' placeholder="Your Name"/>
+                    <a>Join</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm">
+            <h1>Create<br>Private Party</h1>
+            <input id="private-value" type="text" value="" placeholder="Search your movie here...">
+            <a id="private-button" class="fa" onclick="private_party();">😎</a>
+
+            <div id="private-result" class="result">
+                <img id="private-img-res" class="img-res"
+                     src="https://img.freepik.com/free-psd/neon-vertical-flyer-electronic-music-with-female-dj_23-2148979675.jpg"/>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+document.getElementById('join-result').style.display = 'none';
+document.getElementById('private-result').style.display = 'none';
+function private_party(){
+    document.getElementById('join-result').style.display = 'none';
+    document.getElementById('private-result').style.display = 'block';
+}
+async function join_party(){
+    document.getElementById('join-result').style.display = 'block';
+    document.getElementById('private-result').style.display = 'none';
+
+    var join_link = document.getElementById('join-value').value;
+    // console.log(join_link);
+    movie_details_await = await fetch('/joininfo/'+join_link);
+    console.log(movie_details_await);
+    movie_details = await movie_details_await.json();
+    document.getElementById('join-img-res').src = movie_details.poster;
+    console.log(movie_details);
+}
+
+
+</script>
 </body>
 </html>

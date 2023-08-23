@@ -1,0 +1,85 @@
+#whole-contain{
+    margin-top:40px;
+    margin-left:40px;
+}
+#yo{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:black;
+
+}
+.video-js{
+    color:yellow;
+    font-size:15px;
+    background-color:black;
+}
+video{
+    height:flex;
+}
+.vjs-title-bar{
+    height:100%;
+    overlay:hidden;
+    opacity:.7;
+}
+
+@keyframes anim-fade-out{
+    110%{opacity:1.1;}
+    40%{opacity:.4;}
+}
+
+.fade-out{
+    animation: anim-fade-out 1s;
+}
+
+@keyframes anim-fade-in{
+    50%{opacity:.5;}
+    100%{opacity:1;}
+}
+
+.fade-in{
+    animation: anim-fade-in 1s;
+}
+
+.video-js .vjs-big-play-button  {
+    height:1.6em;
+    width:1.6em;
+    border: 2px solid red;
+    border-radius:50%;
+    margin-top:-1.1em;
+
+}
+
+ video[poster]{
+    object-fit: cover;
+      filter: blur(4px);
+  }
+  .vjs-poster {
+    background-size: cover;
+    background-position: inherit;
+  }
+/*video[poster]{
+    filter: blur(0px)
+}
+*/
+
+#link{
+    color:yellow;
+    background-color:black;
+    height:40px;
+    width:580px;
+    font-size:18px;
+    border-bottom:2px solid yellow;
+    border-right:2px solid yellow;
+}
+#link-copy{
+    color:red;
+    background-color:black;
+    border:1px solid red;
+    border-radius:10%;
+    cursor:pointer;
+    height:40px;
+    font-size:18px;
+}

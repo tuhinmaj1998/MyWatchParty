@@ -14,9 +14,11 @@ const genre = document.getElementById('genre').innerHTML;
 const rated = document.getElementById('rated').innerHTML;
 const m_year = document.getElementById('m_year').innerHTML;
 
+
+if (document.querySelector('.vjs-title-bar') != null){
 document.querySelector('.vjs-title-bar').classList.remove('vjs-hidden');
 document.querySelector('.vjs-title-bar').classList.add('fade-out');
-
+}
 let player = videojs('my-video');
 player.hotkeys({
     volumeStep: 0.1,
@@ -27,7 +29,7 @@ let SeekBar = videojs.getComponent('SeekBar');
 
 overlay_content = `<div style="padding-left:20px; text-align:left">
                         <p style="color:#9a9a9a;">You are Watching</p>
-                        <span style="font-size:30px;">`+movie_name+`</span>
+                        <span style="font-size:48px; letter-spacing: 2px;"><b>`+movie_name+`</b></span>
                         <br>
                         <p style='font-style:italic;'>`+m_year+` ● `+genre+`<p>
                         <p style="width:200%;">`+description+`
@@ -147,6 +149,14 @@ videojs('my-video').ready(function(){
                 play_ctime = '00:00';
 
             }
+
+            var styles = `video[poster]{
+                            filter: blur(0px);
+                           }`
+            var styleSheet = document.createElement("style")
+            styleSheet.innerText = styles
+            document.head.appendChild(styleSheet)
+
             console.log(is_playing + '=>'+play_ctime);
 
             document.querySelector('.vjs-title-bar').classList.add('vjs-hidden');
@@ -164,6 +174,12 @@ videojs('my-video').ready(function(){
             console.log(is_playing + '=>'+paused_ctime);
 
 //            vjs-title-bar
+            var styles = `video[poster]{
+                            filter: blur(4px)
+                           }`
+            var styleSheet = document.createElement("style")
+            styleSheet.innerText = styles
+            document.head.appendChild(styleSheet)
             document.querySelector('.vjs-title-bar').classList.remove('vjs-hidden');
             document.querySelector('.vjs-title-bar').classList.add('fade-out');
             document.getElementById('vjs-title-bar-title-28').innerHTML = rated;
