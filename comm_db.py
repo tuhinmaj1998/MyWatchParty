@@ -3,15 +3,8 @@ import psycopg2
 import pandas.io.sql as psql
 import time
 import cred
+import os
 
-# def create_conn():
-#     conn = psycopg2.connect(host="localhost",
-#                             user="",
-#                             password="",
-#                             port=0000,
-#                             dbname="")
-#
-#     return conn
 
 inf_schema_details_table = 'information_schema.columns'
 
@@ -143,20 +136,36 @@ def join_session(session):
             cursor.execute(q_string)
             m_id = cursor.fetchone()[0]
             if m_id is not None:
-                part_url = str(m_id)+'/'+str(session)
+                part_url = str(m_id) + '/' + str(session)
                 return part_url
+
 
 def join_party_info(session):
     m_id = join_session(session).split('/')[0]
     m_detail_dict = get_movie_details(m_id)
     return m_detail_dict
 
-# print(join_party_info('1692472005016427'))
 
+def join_link(name,session):
+    import requests
+    from datetime import datetime
+    get_url = 'https://api.ipify.org/?format=json'
+    ip = requests.get(get_url).json()
+    created_time = datetime.now().date()
+    q_string = f"""insert into mywatchtogether.user_session(ip, user_name, session_id, created_time)
+    values ('{ip["ip"]}', '{name}', '{session}','{created_time}')"""
+    conn = cred.create_conn()
+    cursor = conn.cursor()
+    cursor.execute(q_string)
+    conn.commit()
+    cursor.execute('SELECT LASTVAL()')
+    user_sid = cursor.fetchone()[0]
+    cursor.close()
+    conn.close()
+    return str(user_sid)
 
-
-
-
-
-
+def search_movie(m_name):
+    m_id = get_movie_id(m_name)
+    search_res_dict = get_movie_details(m_id['movie_id'])
+    return search_res_dict
 

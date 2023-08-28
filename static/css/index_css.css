@@ -89,7 +89,7 @@ button:focus {
 .text-over {
   position: absolute;
   top: 83%;
-  left: 40%;
+  left: 42%;
   transform: translate(-50%, -50%);
 }
 
@@ -123,4 +123,9 @@ button:focus {
   color: grey;
   opacity: 1;
   font-size:14px;/* Firefox */
+}
+
+.oops{
+    color:white;
+    font-size:20px;
 }
