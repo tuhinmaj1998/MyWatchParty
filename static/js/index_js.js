@@ -3,6 +3,11 @@ function display_none(){
     document.getElementById('private-result').style.display = 'none';
     document.getElementById('join-oops').style.display = 'none';
     document.getElementById('private-oops').style.display = 'none';
+    document.getElementById('join-session').value = '';
+    document.getElementById('join-session-id').value = '';
+    document.getElementById('join-movie-id').value = '';
+    document.getElementById('private-name').value = '';
+    document.getElementById('private-movie-name').value = '';
 }
 display_none();
 
@@ -19,6 +24,8 @@ async function private_party(){
         if (private_movie_details != null){
             document.getElementById('private-img-res').src = private_movie_details.poster;
             document.getElementById('private-result').style.display = 'block';
+            document.getElementById('private-movie-name').value = private_movie_details.movie_name;
+
             //console.log(movie_details);
         }
         else{
@@ -28,10 +35,15 @@ async function private_party(){
     else{
         document.getElementById('private-oops').style.display = 'block';
         }
-
-
-
 }
+
+async function create_session(){
+    username = document.getElementById('private-name').value;
+    movie_name = document.getElementById('private-movie-name').value;
+    print("/private/"+movie_name);
+    location.href = "/private/"+movie_name;
+}
+
 async function join_party(){
     display_none();
     var join_link = document.getElementById('join-value').value;
@@ -52,6 +64,8 @@ async function join_party(){
         if (movie_details != null){
             document.getElementById('join-img-res').src = movie_details.poster;
             document.getElementById('join-result').style.display = 'block';
+            document.getElementById('join-session-id').value = inp_session;
+            document.getElementById('join-movie-id').value = movie_details.m_id;
             //console.log(movie_details);
         }
         else{
@@ -63,3 +77,11 @@ async function join_party(){
     }
 }
 
+async function join_session(){
+    var username = document.getElementById('join-session').value;
+    var inp_session = document.getElementById('join-session-id').value;
+    var m_id = document.getElementById('join-movie-id').value;
+    console.log(username+', ' + inp_session+', '+ m_id);
+
+    location.href = "/"+m_id+"/"+inp_session;
+}

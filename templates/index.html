@@ -24,8 +24,10 @@
                      src=""/>
 
                 <div class="text-over">
-                    <input type='text' placeholder="Your Name"/>
-                    <a>Join</a>
+                    <input id="join-session" value="" type='text' placeholder="Your Name"/>
+                    <input id="join-session-id" value="" type='text' style='display:none'/>
+                    <input id="join-movie-id" value="" type='text' style='display:none'/>
+                    <a type="submit" onclick="join_session()">Join</a>
                 </div>
             </div>
         </div>
@@ -42,8 +44,12 @@
 
             <div id="private-result" class="result">
                 <img id="private-img-res" class="img-res"
-                     src="https://img.freepik.com/free-psd/neon-vertical-flyer-electronic-music-with-female-dj_23-2148979675.jpg"/>
-
+                     src=""/>
+                <div class="text-over">
+                    <input id="private-name" value="" type='text' placeholder="Your Name"/>
+                    <input id="private-movie-name" value="" type='text' style='display:none'/>
+                    <a type="private" onclick="create_session()">Create</a>
+                </div>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ app.config.update(dict(
     PREFERRED_URL_SCHEME='https'
 ))
 
-print (os.environ['secret_key'])
+# print (os.environ['secret_key'])
 app.config['SECRET_KEY'] = cred.secret_key
 
 

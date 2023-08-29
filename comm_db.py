@@ -143,6 +143,7 @@ def join_session(session):
 def join_party_info(session):
     m_id = join_session(session).split('/')[0]
     m_detail_dict = get_movie_details(m_id)
+    m_detail_dict['m_id'] = m_id
     return m_detail_dict
 
 
@@ -167,5 +168,6 @@ def join_link(name,session):
 def search_movie(m_name):
     m_id = get_movie_id(m_name)
     search_res_dict = get_movie_details(m_id['movie_id'])
+    search_res_dict['m_id'] = m_id
     return search_res_dict
 
