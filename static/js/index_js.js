@@ -40,7 +40,7 @@ async function private_party(){
 async function create_session(){
     username = document.getElementById('private-name').value;
     movie_name = document.getElementById('private-movie-name').value;
-    print("/private/"+movie_name);
+//    console.log("/private/"+movie_name);
     location.href = "/private/"+movie_name;
 }
 
