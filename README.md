@@ -30,6 +30,15 @@ and enjoy content simultaneously.
 
 - **Database**: The project uses PostgreSQL to store session information and user data securely.
 
+   
+## Usage
+
+- Create a new session or join an existing one.
+
+- Share the session link with friends to invite them.
+
+- Enjoy synchronized viewing and control over the content.
+- 
 ## Getting Started
 
 ### Prerequisites
@@ -60,6 +69,7 @@ Before getting started, ensure you have the following prerequisites:
     ```shell
    pip install -r requirements.txt
    ```
+
 5. Create Database in PostgreSQL.
    1. Create schema
     ~~~~sql
@@ -81,20 +91,82 @@ Before getting started, ensure you have the following prerequisites:
     poster character varying(500) COLLATE pg_catalog."default",
     imdb_id character varying(50) COLLATE pg_catalog."default");
     ~~~~
+   3. Create control_movie table too.
+   ~~~~sql
+   CREATE TABLE IF NOT EXISTS mywatchtogether.control_movie(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    movie_id character varying(100) COLLATE pg_catalog."default",
+    current_session character varying(100) COLLATE pg_catalog."default",
+    is_playing boolean,
+    cur_time character varying(50) COLLATE pg_catalog."default",
+    is_bar_dragged boolean
+   );
+   ~~~~
+   4. Create user_session table.
+   ~~~~sql
+   CREATE TABLE IF NOT EXISTS mywatchtogether.user_session(
+    user_sid integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    ip character varying(20) COLLATE pg_catalog."default",
+    user_name character varying(100) COLLATE pg_catalog."default",
+    session_id character varying(100) COLLATE pg_catalog."default",
+    created_time character varying(50) COLLATE pg_catalog."default"
+   );
+   ~~~~
+   5. Since for testing purspose I have already put some video files
+    in static folder to make it ready for functional testing. All you need
+   is to add the corresponding data into your movie_master table.
+   ~~~~sql
+   INSERT INTO mywatchtogether.movie_master(
+   m_name, loc, genre, m_dir, rated, description)
+   VALUES
+      ('Earth', 'Earth.mov','Sample','mymovies','Not Rated','This is a sample video of earth'),
+      ('Beach', 'Beach.mov','Sample','mymovies','Not Rated','This is a sample video of Beach');
+   ~~~~
+6. Create an account in [omdbapi.com](https://www.omdbapi.com/) and add an API Key for better search feature.
+   Note that in free subscription, you have limit of 1000 daily.
 
-6. Run Flask:
+7. Setup your environment variables.
+      <table>
+      <tr>
+      <th>Environment Variable</th>
+      <th>Description</th>
+      </tr>
+      <tr>
+      <td>Database</td>
+      <td>Your DBName</td>
+      </tr>
+      <tr>
+      <td>Host</td>
+      <td>Your DB Host</td>
+      </tr>
+      <tr>
+      <td>Username</td>
+      <td>Your DB Username</td>
+      </tr>
+      <tr>
+      <td>Password</td>
+      <td>Add your DB Password</td>
+      </tr>
+      <tr>
+      <td>Port</td>
+      <td>Your DB Port Number in Integer</td>
+      </tr>
+      <tr>
+      <td>Secret_key</td>
+      <td>For Flask security</td>
+      </tr>
+      <tr>
+      <td>api_key</td>
+      <td>Your omdbapi Key</td>
+      </tr>
+   </table>
+
+8. Run Flask:
     ```shell
    flask run
     ```
-   
-## Usage
 
-- Create a new session or join an existing one.
-
-- Share the session link with friends to invite them.
-
-- Enjoy synchronized viewing and control over the content.
 
 ## Acknowledgement
 
-- Inspiration from WatchTogether and Amazon Prime Watch Party for synchronized viewing.
+Inspiration from [Watch2gether](https://w2g.tv/en/) and [Amazon Prime Watch Party](https://www.primevideo.com/help?nodeId=GLPK9QXFP2NAQDPV) for synchronized viewing.
