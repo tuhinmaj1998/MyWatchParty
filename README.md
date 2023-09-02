@@ -38,7 +38,7 @@ and enjoy content simultaneously.
 - Share the session link with friends to invite them.
 
 - Enjoy synchronized viewing and control over the content.
-- 
+
 ## Getting Started
 
 ### Prerequisites
